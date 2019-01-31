@@ -1,0 +1,227 @@
+<!doctype html>
+<html class="fullscreen-bg">
+
+<head>
+    {% assign exchange = "exchanges." | append: site.exchange %}
+    {% assign title = exchange | append: ".title" %}
+
+    <title>{% t title %}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    {% assign description = exchange | append: ".description" %}
+    {% assign keywords = exchange    | append: ".keywords" %}
+
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/vendor/bootstrap/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/vendor/linearicons/style.css">
+
+    <link href="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/css/fuelux.css" rel="stylesheet">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/css/main.css">
+    <link rel="stylesheet" href="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/css/animate.css">
+    <link rel="stylesheet" href="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/css/control.css">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ site.url }}{{ site.baseurl }}/assets/exchange_logos/favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ site.url }}{{ site.baseurl }}/assets/exchange_logos/favicon.ico">
+
+    <script src="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/scripts/notify/bootstrap-growl.min.js"></script>
+    <script src="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/scripts/notify/notify.js"></script>
+    <script src="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/scripts/sweetalert/sweetalert.min.js"></script>
+    <script src="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/vendor/bootstrap/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+    <script src="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/vendor/chartist/js/chartist.min.js"></script>
+    <script src="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/scripts/klorofil-common.js"></script>
+    <script data-cfasync="false" src="{{ site.url }}{{ site.baseurl }}/assets/js/bitex_app_trade.compiled.{{site.lang}}.brabex.js?v={{ site.deploy_version }}" type="text/javascript"></script>
+    <script src="{{ site.url }}{{ site.baseurl }}/assets/js/externs/qrcode.min.js"></script>
+</head>
+
+<body class="{% if page.body_classes %} {{ page.body_classes }} {% endif %}">
+    <!-- WRAPPER -->
+    <div id="wrapper">
+        <nav id="id_toolbar" class="navbar navbar-default navbar-fixed-top">
+
+            {% if page.load_application %}
+                <div class="brand" data-switch-view="offerbook">
+                    <a href=""><img src="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/img/brabex.png" alt="BRABEX Logo" class="img-responsive logo"></a>
+                </div>
+            {% else %}
+                <div class="brand" href="{{ site.url }}{{ site.baseurl }}/">
+                    <a href=""><img src="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/img/brabex.png" alt="BRABEX Logo" class="img-responsive logo"></a>
+                </div>
+            {% endif %}
+
+            <!-- INIT INTERNAL HEADER-->
+            <div class="container-fluid bitex-show-if-logged">
+                <div class="navbar-btn">
+                    <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+                </div>
+                <div class="col-md-12 navbar-info-number variations-desktop">
+                    <ul class="navbar-market-info">
+                        <li>
+                            <h4>
+                                <span class="navbar-market-info-nums bitex-model" data-model-key-list="formatted_BITEX_BTCBRL_HIGH_PX"
+                                    data-model-formula="formatted_BITEX_BTCBRL_HIGH_PX"
+                                    data-blink-class="balance-info-blink"></span>
+                                <span class="navbar-market-info-desc">{% t views.toolbar.high %}</span>
+                            </h4>
+                        </li>
+                        <li>
+                            <h4>
+                                <span class="navbar-market-info-nums bitex-model" data-model-key-list="formatted_BITEX_BTCBRL_LOW_PX"
+                                    data-model-formula="formatted_BITEX_BTCBRL_LOW_PX"
+                                    data-blink-class="balance-info-blink"></span>
+                                <span class="navbar-market-info-desc">{% t views.toolbar.low %}</span>
+                            </h4>
+                        </li>
+                        <li>
+                            <h4>
+                                <span class="navbar-market-info-nums bitex-model" data-model-key-list="formatted_BITEX_BTCBRL_LAST_PX"
+                                    data-model-formula="formatted_BITEX_BTCBRL_LAST_PX"
+                                    data-blink-class="balance-info-blink"></span>
+                                <span class="navbar-market-info-desc">{% t views.toolbar.last %}</span>
+                            </h4>
+                        </li>
+                        <li>
+                            <h4>
+                                <span class="navbar-market-info-nums down bitex-model" data-model-key-list="formatted_BITEX_BTCBRL_VARIATION"
+                                    data-model-formula="formatted_BITEX_BTCBRL_VARIATION"
+                                    data-blink-class="balance-info-blink"></span>
+                                <span class="navbar-market-info-desc">{% t views.toolbar.variation %}</span>
+                            </h4>
+                        </li>
+                        <li>
+                            <h4>
+                                <span class="navbar-market-info-nums bitex-model" data-model-key-list="formatted_BITEX_BTCBRL_VOLUME"
+                                    data-model-formula="formatted_BITEX_BTCBRL_VOLUME"
+                                    data-blink-class="balance-info-blink"></span>
+                                <span class="navbar-market-info-desc">{% t views.toolbar.volume %}</span>
+                            </h4>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav navbar-nav navbar-right menu-icons-group">
+		    <li class="dropdown drop-right menu-icon variations-mobile">
+                        <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown" aria-expanded="true">
+                            <i class="lnr lnr-chart-bars"></i>
+                        </a>
+                        <ul class="dropdown-menu notifications">
+                            <li class="broker-model">
+                                <a href="#" class="notification-item">
+                                    {% t views.toolbar.high %}
+                                    <span class="navbar-market-info-nums broker-model" data-model-key-list="formatted_BITEX_BTCBRL_HIGH_PX"
+                                    data-model-formula="formatted_BITEX_BTCBRL_HIGH_PX"
+                                    data-blink-class="balance-info-blink"></span>
+                                </a>
+                            </li>
+                            <li class="broker-model">
+                                <a href="#" class="notification-item">
+                                    {% t views.toolbar.low %}
+                                    <span class="navbar-market-info-nums broker-model" data-model-key-list="formatted_BITEX_BTCBRL_LOW_PX"
+                                    data-model-formula="formatted_BITEX_BTCBRL_LOW_PX"
+                                    data-blink-class="balance-info-blink"></span>
+                                </a>
+                            </li>
+                            <li class="broker-model">
+                                <a href="#" class="notification-item">
+                                    {% t views.toolbar.last %}
+                                    <span class="navbar-market-info-nums broker-model" data-model-key-list="formatted_BITEX_BTCBRL_LAST_PX"
+                                    data-model-formula="formatted_BITEX_BTCBRL_LAST_PX"
+                                    data-blink-class="balance-info-blink"></span>
+                                </a>
+                            </li>
+                            <li class="broker-model">
+                                <a href="#" class="notification-item">
+                                    {% t views.toolbar.variation %}
+                                    <span class="navbar-market-info-nums down broker-model" data-model-key-list="formatted_BITEX_BTCBRL_VARIATION"
+                                    data-model-formula="formatted_BITEX_BTCBRL_VARIATION"
+                                    data-blink-class="balance-info-blink"></span>
+                                </a>
+                            </li>
+                            <li class="broker-model">
+                                <a href="#" class="notification-item">
+                                    {% t views.toolbar.volume %}
+                                    <span class="navbar-market-info-nums broker-model" data-model-key-list="formatted_BITEX_BTCBRL_VOLUME"
+                                    data-model-formula="formatted_BITEX_BTCBRL_VOLUME"
+                                    data-blink-class="balance-info-blink"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+			
+                    <li class="dropdown drop-right">
+                        <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown" aria-expanded="true">
+                            <i class="lnr lnr-alarm"></i>
+                            <span class="badge bg-danger bitex-model" data-model-key-list="number_of_alerts" data-model-formula="number_of_alerts" data-blink-class="balance-info-blink"></span>
+                        </a>
+                        <ul class="dropdown-menu notifications">
+                            <li class="bitex-model" data-model-key="IsMissingVerification" style="display:none;" data-model-action="show_element">
+                                <a href="#" class="notification-item" data-switch-view="verification">
+                                    <span class="dot bg-warning"></span>
+                                    Verifique sua conta
+                                </a>
+                            </li>
+                            <li class="bitex-model" style="display: none;" data-model-key="TwoFactorEnabled" data-model-action="hide_element">
+                                <a href="#" class="notification-item" data-switch-view="twofactor">
+                                    <span class="dot bg-success"></span>
+                                    Habilitar autenticação 2 passos
+                                </a>
+                            </li>
+                            <li class="bitex-model" style="display: none" data-model-key="IsAccountBlocked" data-model-action="show_element">
+                                <a href="#" class="notification-item" data-switch-view="faq">
+                                    <span class="dot bg-danger"></span>
+                                    Sua conta foi bloqueada
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown drop-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{ site.url }}{{ site.baseurl }}/assets/themes/brabex/assets/img/user.png" class="img-circle" alt="">
+                                <span class="bitex-model bitex-view-title" data-model-key="DisplayName"></span>
+                                <i class="icon-submenu lnr lnr-chevron-down"></i>
+                                <i class="icon-submenu-flat lnr lnr-menu"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="" data-switch-view="profile">
+                                <i class="lnr lnr-user" data-switch-view="profile"></i>Meu Perfil</a>
+                            </li>
+                            <li><a href="#" class="night-mode-btn" onclick="nightMode()">
+                                <i class="lnr lnr-moon"></i>Ativar Modo Noturno</a>
+                            </li>
+                            <li>
+                              <a href="" data-switch-view="api">
+                                  <i data-switch-view="api" class="lnr lnr-cloud"></i> {% t views.sidebar.api %}
+                              </a>
+                            </li>
+                            <li style="">
+                              <a href="" data-switch-view="faq">
+                                  <i data-switch-view="faq" class="lnr lnr-question-circle"></i> {% t views.sidebar.support %}
+                              </a>
+                            </li>
+                            <li><a href="javascript:location.reload()">
+                              <i class="lnr lnr-exit"></i> {% t views.sidebar.logout %}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </div>
+            </div>
+            <!-- END EXTERNAL HEADER-->
+
+            {% if page.load_application %}
+              <button id="id_button_connect_ws" class="bitex-hide-if-ws-connected btn-link"
+                      style="display: none;">{% t views.toolbar.connect %}
+                  <i class="icon-white icon-repeat"></i>
+              </button>
+            {% endif %}
+
+        </nav>
